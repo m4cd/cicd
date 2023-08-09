@@ -28,3 +28,6 @@ jobs:
 
       - name: Push docker image
         run: (gcloud builds submit --tag europe-central2-docker.pkg.dev/valid-climber-394813/notely-ar-repo/notely:latest .)
+
+      - name: 'Deploy to Cloud Run'
+        run: gcloud run deploy notely --image europe-central2-docker.pkg.dev/valid-climber-394813/notely-ar-repo/notely:latest --region us-central1 --allow-unauthenticated --project valid-climber-394813 --max-instances=4
