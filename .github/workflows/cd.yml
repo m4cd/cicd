@@ -20,3 +20,11 @@ jobs:
 
       - name: Build app
         run: (./scripts/buildprod.sh)
+
+      - name: Auuthenticate to GCP
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}' 
+
+      - name: Push docker image
+        run: (gcloud builds submit --tag europe-central2-docker.pkg.dev/valid-climber-394813/notely-ar-repo/notely:latest .)
